@@ -69,6 +69,7 @@ body::after{
 @keyframes shine{0%,55%{left:-40%;opacity:0}65%{opacity:1}90%,100%{left:120%;opacity:0}}
 
 .hero{padding:46px 42px 38px;animation:heroIn .8s cubic-bezier(.2,.8,.2,1)}
+
 @keyframes heroIn{from{opacity:0;transform:translateY(28px) scale(.98)}to{opacity:1;transform:none}}
 .hero .eyebrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
 .pill{
@@ -265,44 +266,86 @@ const BACKEND_URL = "https://quiz-k118.onrender.com";
 
 
 const BANK = [
+
 /* JAVA */
-{t:"Java",q:'What is the output of System.out.println(10 + 20 + "Java");',o:["30Java","Java30","1020Java","Error"],a:0},
-{t:"Java",q:"Which is used to compare the contents of two Java strings?",o:["==","equals()","compare()","same()"],a:1},
-{t:"Java",q:"Can a constructor be inherited in Java?",o:["Yes","No","Only static constructors","Only private constructors"],a:1},
-{t:"Java",q:"What happens if main() is declared private?",o:["Program runs normally","Compilation fails","JVM cannot use it as the entry point","It becomes static automatically"],a:2},
-{t:"Java",q:"What is method overloading?",o:["Same method name with different parameters","Same method name in different packages only","Replacing a variable","Hiding a class"],a:0},
-{t:"Java",q:"What is method overriding?",o:["Defining same method in subclass with compatible signature","Creating multiple constructors","Changing a variable type","Importing a method"],a:0},
-{t:"Java",q:"Can a Java class extend multiple classes?",o:["Yes","No","Only two","Only with final"],a:1},
-{t:"Java",q:"Which keyword prevents a method from being overridden?",o:["static","final","private","const"],a:1},
-{t:"Java",q:"Which block normally executes whether an exception occurs or not?",o:["try","catch","finally","throw"],a:2},
-{t:"Java",q:"Which is generally better for repeated string modifications?",o:["StringBuilder","String","Character","Object"],a:0},
+
+{t:"Java",q:"Which feature of Java allows the same method name to behave differently based on the parameters passed?",o:["Encapsulation","Inheritance","Method Overloading","Method Overriding"],a:2},
+
+{t:"Java",q:"Which component of the JVM is primarily responsible for converting Java bytecode into native machine instructions at runtime?",o:["Class Loader","Garbage Collector","JIT Compiler","Java Compiler"],a:2},
+
+{t:"Java",q:"Which of the following is an unchecked exception in Java?",o:["IOException","SQLException","ClassNotFoundException","NullPointerException"],a:3},
+
+{t:"Java",q:"Which Java collection does not allow duplicate elements?",o:["ArrayList","LinkedList","HashSet","Vector"],a:2},
+
+{t:"Java",q:"Why is String immutable in Java?",o:["To prevent inheritance","To improve security and enable string pooling","To reduce class size","To prevent garbage collection"],a:1},
+
+{t:"Java",q:"Which statement about Java interfaces is correct?",o:["An interface can be instantiated directly","A class can implement multiple interfaces","An interface cannot contain default methods","An interface must contain only abstract methods"],a:1},
+
+{t:"Java",q:"Which statement about Java garbage collection is correct?",o:["System.gc() guarantees immediate garbage collection","Garbage collection can be explicitly controlled completely by the programmer","Garbage collection automatically reclaims eligible objects","Garbage collection only works for primitive variables"],a:2},
+
+{t:"Java",q:"Which Java method causes the current thread to release the monitor lock and wait until another thread invokes notify() or notifyAll()?",o:["sleep()","wait()","yield()","join()"],a:1},
+
+{t:"Java",q:"Which Java access modifier provides the widest accessibility?",o:["private","protected","default","public"],a:3},
+
+{t:"Java",q:"Which type of polymorphism is achieved through method overriding in Java?",o:["Compile-time polymorphism","Runtime polymorphism","Static polymorphism","Preprocessing polymorphism"],a:1},
+
 
 /* C */
-{t:"C",q:"What is the difference between ++i and i++?",o:["No difference","++i increments before use; i++ after use","i++ increments before use","Both decrement"],a:1},
-{t:"C",q:"What is a dangling pointer?",o:["Pointer to valid memory","Pointer that points to memory no longer valid","NULL pointer only","Pointer to a function"],a:1},
-{t:"C",q:"Which statement about malloc() and calloc() is correct?",o:["Both initialize memory to zero","malloc() allocates; calloc() allocates and zero-initializes","calloc() is only for strings","malloc() frees memory"],a:1},
-{t:"C",q:"What commonly causes a segmentation fault?",o:["Valid array access","Invalid memory access","Using printf()","Declaring int"],a:1},
-{t:"C",q:"What is the first index of a C array?",o:["0","1","-1","Depends on compiler"],a:0},
-{t:"C",q:"If p is a pointer, what does *p represent?",o:["Address of p","Value stored at the address p points to","Size of p","Pointer type"],a:1},
-{t:"C",q:"What can static do to a local variable?",o:["Make it retain its value between function calls","Delete it after each call","Make it constant","Make it a pointer"],a:0},
-{t:"C",q:"What is recursion?",o:["A function calling itself","A loop only","A pointer operation","A header file"],a:0},
-{t:"C",q:"What is a major problem with freeing the same allocated memory twice?",o:["It is always safe","Undefined behavior","It doubles memory","It converts memory to NULL automatically"],a:1},
-{t:"C",q:"What is a key difference between struct and union?",o:["Union members share the same memory","Struct members always share memory","Union cannot contain integers","Struct cannot contain pointers"],a:0},
+
+{t:"C",q:"Which storage class in C gives a variable internal linkage when declared at file scope?",o:["auto","static","register","extern"],a:1},
+
+{t:"C",q:"Which statement about a void pointer in C is correct?",o:["It can only point to integer variables","It can point to any data type","It cannot store an address","It is automatically dereferenced"],a:1},
+
+{t:"C",q:"Which C memory allocation function initializes the allocated memory to zero?",o:["malloc()","calloc()","realloc()","free()"],a:1},
+
+{t:"C",q:"Which phase of the C compilation process handles macro expansion?",o:["Linking","Preprocessing","Assembly","Loading"],a:1},
+
+{t:"C",q:"In C, an array name generally represents what in most expressions?",o:["A constant pointer","The address of its first element","A dynamically allocated pointer","The address of the last element"],a:1},
+
+{t:"C",q:"Which situation can result in undefined behavior in C?",o:["Reading an initialized variable","Accessing an array within bounds","Dereferencing a null pointer","Assigning an integer to another integer"],a:2},
+
+{t:"C",q:"Which statement correctly distinguishes a struct from a union in C?",o:["Struct members share the same memory","Union members occupy separate memory locations","Struct members generally have separate storage, while union members share storage","There is no difference"],a:2},
+
+{t:"C",q:"What is a function pointer primarily used for in C?",o:["Storing floating-point values","Storing the address of a function","Allocating heap memory","Creating structures"],a:1},
+
+{t:"C",q:"What does the declaration const int *p conceptually indicate in C?",o:["The pointer itself cannot change","The integer value pointed to cannot be modified through p","Both pointer and integer are constant","p cannot contain an address"],a:1},
+
+{t:"C",q:"The volatile keyword in C is primarily used to indicate that:",o:["A variable cannot be modified","A variable may change unexpectedly outside normal program flow","A variable must be stored in CPU registers","A variable is dynamically allocated"],a:1},
+
 
 /* PYTHON */
-{t:"Python",q:"What is the output of print(2 ** 3 ** 2)?",o:["64","512","256","36"],a:1},
-{t:"Python",q:"Which statement correctly compares list and tuple?",o:["Both are immutable","List is mutable; tuple is immutable","Tuple is mutable; list is immutable","Neither can store numbers"],a:1},
-{t:"Python",q:"What is the main difference between is and ==?",o:["Both always test identity","is tests identity; == tests equality","== tests identity only","is performs arithmetic"],a:1},
-{t:"Python",q:"Which is a mutable built-in Python object?",o:["tuple","string","list","int"],a:2},
-{t:"Python",q:"What is the output of print(bool([]))?",o:["True","False","[]","Error"],a:1},
-{t:"Python",q:"What is a lambda function?",o:["Anonymous function","Loop","Module","Exception"],a:0},
-{t:"Python",q:"What is the difference between append() and extend()?",o:["Both always do the same thing","append adds one object; extend adds elements from an iterable","extend removes elements","append only works on strings"],a:1},
-{t:"Python",q:"What is self in a Python class?",o:["A keyword for inheritance","Reference to the current instance","A global variable","A module name"],a:1},
-{t:"Python",q:"Which keyword is used to handle an exception?",o:["error","except","handle","catch"],a:1},
-{t:"Python",q:"Which statement about shallow and deep copy is correct?",o:["Deep copy recursively copies nested objects","Shallow copy always duplicates everything","They are identical","Neither can copy lists"],a:0}
-];
 
+{t:"Python",q:"Which of the following Python data types is immutable?",o:["List","Set","Dictionary","Tuple"],a:3},
+
+{t:"Python",q:"What is the primary purpose of a Python decorator?",o:["To delete a function","To modify or extend a function's behavior","To convert a function into a class","To increase memory allocation"],a:1},
+
+{t:"Python",q:"What is the main purpose of the __init__() method in Python?",o:["Destroy an object","Initialize an object's attributes","Create a module","Define a static method"],a:1},
+
+{t:"Python",q:"Which mechanism is primarily used by Python to automatically reclaim memory from unreachable objects?",o:["Manual deallocation","Garbage collection","Pointer arithmetic","Stack clearing"],a:1},
+
+{t:"Python",q:"What is the average-case time complexity of looking up a key in a Python dictionary?",o:["O(1)","O(log n)","O(n)","O(n²)"],a:0},
+
+{t:"Python",q:"Which property distinguishes a Python set from a list?",o:["A set allows duplicate elements","A set stores only key-value pairs","A set contains unique elements","A set supports indexing like a list"],a:2},
+
+{t:"Python",q:"Which keyword is used to modify a variable belonging to the enclosing function scope?",o:["global","local","nonlocal","outer"],a:2},
+
+{t:"Python",q:"Which method must a Python iterator implement to return the next element?",o:["next()","__next__()","iterate()","__iterate__()"],a:1},
+
+{t:"Python",q:"What is a Python lambda expression primarily used for?",o:["Defining anonymous functions","Creating classes","Handling exceptions","Importing modules"],a:0},
+
+{t:"Python",q:"Which Python block is executed regardless of whether an exception occurs?",o:["try","except","else","finally"],a:3}
+
+];
 let quiz=[], current=0, answers=[], seconds=60, interval;
+
+function shuffle(array){
+  for(let i = array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 
 function setStartStatus(message, type=""){
   const el = document.getElementById("startStatus");
@@ -386,21 +429,38 @@ async function startQuiz() {
     setStartStatus("");
 
     /*
-     * FIXED QUIZ
-     * Every student gets exactly the same 30 questions:
+     * JUMBLED QUIZ
+     * Every student gets the same 30 questions:
+     * 10 Java + 10 C + 10 Python.
      *
-     * 1 - 10   Java
-     * 11 - 20  C
-     * 21 - 30  Python
-     *
-     * No question shuffling.
-     * No option shuffling.
+     * The questions are shuffled for every student, and the
+     * language order is also shuffled while keeping exactly
+     * 10 questions from each language.
+     * No two consecutive questions use the same language.
+     * Options stay in the same A/B/C/D order.
      */
-    quiz = [
-      ...BANK.filter(x => x.t === "Java").slice(0, 10),
-      ...BANK.filter(x => x.t === "C").slice(0, 10),
-      ...BANK.filter(x => x.t === "Python").slice(0, 10)
-    ];
+    const javaQuestions = shuffle([...BANK.filter(x => x.t === "Java")]).slice(0, 10);
+    const cQuestions = shuffle([...BANK.filter(x => x.t === "C")]).slice(0, 10);
+    const pythonQuestions = shuffle([...BANK.filter(x => x.t === "Python")]).slice(0, 10);
+
+    const languagePool = shuffle([
+      ...Array(10).fill("Java"),
+      ...Array(10).fill("C"),
+      ...Array(10).fill("Python")
+    ]);
+
+    // Re-shuffle the language pattern until no same-language pair is adjacent.
+    while (languagePool.some((lang, i) => i > 0 && lang === languagePool[i - 1])) {
+      shuffle(languagePool);
+    }
+
+    const questionQueues = {
+      Java: javaQuestions,
+      C: cQuestions,
+      Python: pythonQuestions
+    };
+
+    quiz = languagePool.map(lang => questionQueues[lang].pop());
 
     answers = Array(quiz.length).fill(null);
     current = 0;
