@@ -337,6 +337,7 @@ const BANK = [
 
 ];
 let quiz=[], current=0, answers=[], seconds=60, interval;
+let quizStarted=false, quizFinished=false;
 
 function shuffle(array){
   for(let i = array.length - 1; i > 0; i--){
@@ -429,42 +430,23 @@ async function startQuiz() {
     setStartStatus("");
 
     /*
-     * JUMBLED QUIZ
-     * Every student gets the same 30 questions:
-     * 10 Java + 10 C + 10 Python.
-     *
-     * The questions are shuffled for every student, and the
-     * language order is also shuffled while keeping exactly
-     * 10 questions from each language.
-     * No two consecutive questions use the same language.
-     * Options stay in the same A/B/C/D order.
+     * FIXED QUIZ ORDER
+     * Every student gets the exact same 30 questions
+     * in the same order as they appear in BANK.
+     * Options also stay in A/B/C/D order.
      */
-    const javaQuestions = shuffle([...BANK.filter(x => x.t === "Java")]).slice(0, 10);
-    const cQuestions = shuffle([...BANK.filter(x => x.t === "C")]).slice(0, 10);
-    const pythonQuestions = shuffle([...BANK.filter(x => x.t === "Python")]).slice(0, 10);
-
-    const languagePool = shuffle([
-      ...Array(10).fill("Java"),
-      ...Array(10).fill("C"),
-      ...Array(10).fill("Python")
-    ]);
-
-    // Re-shuffle the language pattern until no same-language pair is adjacent.
-    while (languagePool.some((lang, i) => i > 0 && lang === languagePool[i - 1])) {
-      shuffle(languagePool);
-    }
-
-    const questionQueues = {
-      Java: javaQuestions,
-      C: cQuestions,
-      Python: pythonQuestions
-    };
-
-    quiz = languagePool.map(lang => questionQueues[lang].pop());
+    quiz = BANK.map(q => ({
+      t: q.t,
+      q: q.q,
+      o: [...q.o],
+      a: q.a
+    }));
 
     answers = Array(quiz.length).fill(null);
     current = 0;
     seconds = 60;
+    quizStarted = true;
+    quizFinished = false;
 
     document.getElementById("start").classList.add("hidden");
     document.getElementById("quiz").classList.remove("hidden");
@@ -631,6 +613,53 @@ function escapeHtml(s){
 }
 
 
+/* =========================
+   MOBILE ANTI-CHEAT
+   ========================= */
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && quizStarted && !quizFinished) {
+    finish("left-quiz");
+  }
+});
+
+document.addEventListener("copy", (e) => {
+  if (quizStarted && !quizFinished) e.preventDefault();
+});
+
+document.addEventListener("cut", (e) => {
+  if (quizStarted && !quizFinished) e.preventDefault();
+});
+
+document.addEventListener("paste", (e) => {
+  if (quizStarted && !quizFinished) e.preventDefault();
+});
+
+document.addEventListener("contextmenu", (e) => {
+  if (quizStarted && !quizFinished) e.preventDefault();
+});
+
+document.addEventListener("selectstart", (e) => {
+  if (quizStarted && !quizFinished) e.preventDefault();
+});
+
+document.addEventListener("dragstart", (e) => {
+  if (quizStarted && !quizFinished) e.preventDefault();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (!quizStarted || quizFinished) return;
+
+  const key = e.key.toLowerCase();
+  const blockedShortcut =
+    (e.ctrlKey || e.metaKey) &&
+    ["c", "u", "s", "p", "a"].includes(key);
+
+  if (blockedShortcut || e.key === "F12") {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+});
+
 function save(){
 
   const r =
@@ -660,8 +689,11 @@ function nextQ(){
 }
 
 
-function finish(){
+function finish(reason=""){
 
+  if(quizFinished) return;
+  quizFinished=true;
+  quizStarted=false;
   clearInterval(interval);
 
   save();
@@ -689,8 +721,9 @@ function finish(){
       `${score} / ${quiz.length}`;
 
   document.getElementById("message")
-    .textContent =
-      score >= 25
+    .textContent = reason === "left-quiz"
+      ? "Quiz submitted automatically because you left the quiz page."
+      : score >= 25
         ? "Excellent!"
         : score >= 20
           ? "Good job!"
